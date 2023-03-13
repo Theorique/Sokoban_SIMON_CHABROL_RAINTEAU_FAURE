@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "sokoban",
+    "slug": "sokoban",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "sokoban"
+}
