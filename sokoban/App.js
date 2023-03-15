@@ -1,22 +1,31 @@
 import { StatusBar } from "expo-status-bar";
-import React, { Component } from "react";
-import { StyleSheet, Text, View, FlatList } from "react-native";
+import React, { Component, useDebugValue, useState } from "react";
+import { StyleSheet, Text, View, FlatList, SafeAreaView } from "react-native";
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { plateau: ["ok"] };
+    this.state = { plateau: ["ok"], joueur: null };
   }
 
   componentDidMount() {
     const customData = require("./plateau/plateau-dur.json");
-    console.log(customData);
     let temp = customData["text"].split("\n");
     let plat = [];
-    temp.map((value, key) => (plat[key] = value.split("")));
-    console.log(plat);
-    console.log(temp);
+    temp.map((value, key) => {
+      let ligne = value.split("");
+      const dataWithKeys = ligne.map((item, key2) => {
+        id = key * 9 + key2;
+        return { ...item, key: id };
+      });
+      plat[key] = dataWithKeys;
+    });
     this.setState({ plateau: plat });
+  }
+  handleOnPress(key) {
+    console.log("La clé de l'élément est :", ((key / 9) >> 0) + " " + this.state.plateau[(key/9) >> 0]);
+    const item = this.state.plateau[(key/9) >> 0].find((item)=> item.key === key);
+    console.log(item[0]);
   }
   render() {
     return (
@@ -25,12 +34,20 @@ class App extends Component {
         <FlatList
           data={this.state.plateau}
           numColumns={1}
-          renderItem={({ item }) => (
+          keyExtractor={(item, index) => `${item.id}-${index}`}
+          renderItem={(item) => (
             <FlatList
-              data={item}
+              data={item.item}
               numColumns={9}
-              keyExtractor={(item2, index) => index.toString()}
-              renderItem={({ item: item2 }) => <Text style={styles.grid}>{item2}</Text>}
+              keyExtractor={(item2, index2) => `${item.id}*9+${index2}`}
+              renderItem={({ item: item2 }) => (
+                <Text
+                  onPress={() => this.handleOnPress(item2.key)}
+                  style={styles.grid}
+                >
+                  {item2[0]}
+                </Text>
+              )}
             />
           )}
         />
@@ -49,7 +66,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#fff",
   },
-  grid:{
-    width:13,
-  }
+  grid: {
+    width: 13,
+  },
 });
