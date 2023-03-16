@@ -5,12 +5,13 @@ import { StyleSheet, Text, View, FlatList, SafeAreaView } from "react-native";
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { plateau: ["ok"], joueur: null, playerPos: 0 };
+    this.state = { plateau: ["ok"], joueur: null, playerPos: 0, cibles: []};
   }
 
   componentDidMount() {
     const customData = require("./plateau/plateau-dur.json");
     let temp = customData["text"].split("\n");
+    let cible = [];
     let plat = [];
     temp.map((value, key) => {
       let ligne = value.split("");
@@ -19,112 +20,53 @@ class App extends Component {
         if (item === "P") {
           this.setState({ playerPos: id });
         }
+        if (item === "x") {
+          cible.push(id);
+        }
         return { ...item, key: id };
       });
       plat[key] = dataWithKeys;
     });
-    this.setState({ plateau: plat });
-  }
-  handleOnPress(key) {
-    console.log(
-      "La clé de l'élément est :",
-      ((key / 9) >> 0) + " " + this.state.plateau[(key / 9) >> 0]
-    );
-    const item = this.state.plateau[(key / 9) >> 0].find(
-      (item) => item.key === key
-    );
-    console.log(item[0]);
+    this.setState({ plateau: plat, cibles: cible });
   }
   findWithId(id, tab) {
     return tab[(id / 9) >> 0].find((item) => item.key === id);
   }
-  moveUp() {
+  checkTarget() {
+    let win = true;
     let tab = this.state.plateau;
-    let p = this.state.playerPos;
-    if (
-      p > 8 &&
-      this.findWithId(p - 9, this.state.plateau)[0] === "."
-    ) {
-      this.findWithId(p - 9, tab)[0] = "P";
-      this.findWithId(p, tab)[0] = ".";
-      this.setState({ plateau: tab, playerPos: p - 9 });
-    } else if (
-      p > 17 &&
-      this.findWithId(p - 9, this.state.plateau)[0] ===
-        "C" &&
-      this.findWithId(p - 18, this.state.plateau)[0] === "."
-    ) {
-      this.findWithId(p - 9, tab)[0] = "P";
-      this.findWithId(p - 18, tab)[0] = "C";
-      this.findWithId(p, tab)[0] = ".";
-      this.setState({ plateau: tab, playerPos: p - 9 });
+    this.state.cibles.map((item) => {
+      if (this.findWithId(item, tab)[0] !== "C") {
+        win = false;
+      }
+      if (this.findWithId(item, tab)[0] === ".") {
+        this.findWithId(item, tab)[0] = "x";
+      }
+    });
+    this.setState({ plateau: tab});
+    if(win){
+      console.log("Vous avez gagné");
     }
   }
-  moveRight() {
+  move(direction) {
     let tab = this.state.plateau;
     let p = this.state.playerPos;
-    if (
-      (p%9) < 8 &&
-      this.findWithId(p + 1, this.state.plateau)[0] === "."
-    ) {
-      this.findWithId(p + 1, tab)[0] = "P";
+    let devant = this.findWithId(p + direction, this.state.plateau)[0];
+    if (devant === "." || devant === "x") {
+      this.findWithId(p + direction, tab)[0] = "P";
       this.findWithId(p, tab)[0] = ".";
-      this.setState({ plateau: tab, playerPos: p + 1 });
+      this.setState({ plateau: tab, playerPos: p + direction });
     } else if (
-      (p%9) > 7 &&
-      this.findWithId(p + 1, this.state.plateau)[0] ===
-        "C" &&
-      this.findWithId(p + 2, this.state.plateau)[0] === "."
+      devant === "C" &&
+      (this.findWithId(p + 2 * direction, this.state.plateau)[0] === "." ||
+        this.findWithId(p + 2 * direction, this.state.plateau)[0] === "x")
     ) {
-      this.findWithId(p + 1, tab)[0] = "P";
-      this.findWithId(p + 2, tab)[0] = "C";
+      this.findWithId(p + direction, tab)[0] = "P";
+      this.findWithId(p + 2 * direction, tab)[0] = "C";
       this.findWithId(p, tab)[0] = ".";
-      this.setState({ plateau: tab, playerPos: p + 1 });
+      this.setState({ plateau: tab, playerPos: p + direction });
     }
-  }
-  moveLeft() {
-    let tab = this.state.plateau;
-    let p = this.state.playerPos;
-    if (
-      (p%9) > 0 &&
-      this.findWithId(p - 1, this.state.plateau)[0] === "."
-    ) {
-      this.findWithId(p - 1, tab)[0] = "P";
-      this.findWithId(p, tab)[0] = ".";
-      this.setState({ plateau: tab, playerPos: p - 1 });
-    } else if (
-      (p%9) > 1 &&
-      this.findWithId(p - 1, this.state.plateau)[0] ===
-        "C" &&
-      this.findWithId(p - 2, this.state.plateau)[0] === "."
-    ) {
-      this.findWithId(p - 1, tab)[0] = "P";
-      this.findWithId(p - 2, tab)[0] = "C";
-      this.findWithId(p, tab)[0] = ".";
-      this.setState({ plateau: tab, playerPos: p - 1 });
-    }
-  }
-  moveDown() {
-    let tab = this.state.plateau;
-    let p = this.state.playerPos;
-    if (
-      p < 45 &&
-      this.findWithId(p + 9, this.state.plateau)[0] === "."
-    ) {
-      this.findWithId(p + 9, tab)[0] = "P";
-      this.findWithId(p, tab)[0] = ".";
-      this.setState({ plateau: tab, playerPos: p + 9 });
-    } else if (
-      p < 36 &&
-      this.findWithId(p + 9, this.state.plateau)[0] ===
-        "C" &&
-      this.findWithId(p + 18, this.state.plateau)[0] === "."
-    ) {
-      this.findWithId(p + 9, tab)[0] = "P";
-      this.findWithId(p + 18, tab)[0] = "C";
-      this.findWithId(p, tab)[0] = ".";
-      this.setState({ plateau: tab, playerPos: p + 9 });
-    }
+    this.checkTarget();
   }
   render() {
     return (
@@ -140,24 +82,23 @@ class App extends Component {
               numColumns={9}
               keyExtractor={(item2, index2) => `${item.id}*9+${index2}`}
               renderItem={({ item: item2 }) => (
-                <Text
-                  onPress={() => this.handleOnPress(item2.key)}
-                  style={styles.grid}
-                >
-                  {item2[0]}
-                </Text>
+                <Text style={styles.grid}>{item2[0]}</Text>
               )}
             />
           )}
         />
-        <Text onPress={() => this.moveUp()} style={styles.up}>
+        <Text onPress={() => this.move(-9)} style={styles.up}>
           up
         </Text>
-        <Text onPress={() => this.moveRight()} style={styles.right}>
+        <Text onPress={() => this.move(1)} style={styles.right}>
           right
         </Text>
-        <Text onPress={() => this.moveDown()} style={styles.down}>down</Text>
-        <Text onPress={() => this.moveLeft()} style={styles.left}>left</Text>
+        <Text onPress={() => this.move(9)} style={styles.down}>
+          down
+        </Text>
+        <Text onPress={() => this.move(-1)} style={styles.left}>
+          left
+        </Text>
       </View>
     );
   }
@@ -176,7 +117,6 @@ const styles = StyleSheet.create({
   grid: {
     width: 13,
   },
-  arrow: {},
   up: {
     backgroundColor: "blue",
     color: "white",
