@@ -7,7 +7,7 @@ import {
   Image,
   View, ImageBackground,
   FlatList,
-  SafeAreaView,
+  SafeAreaView, Alert,
 } from "react-native";
 
 class App extends Component {
@@ -53,7 +53,13 @@ class App extends Component {
     });
     this.setState({ plateau: tab });
     if (win) {
-      console.log("Vous avez gagné");
+      Alert.alert('Sokoban niveau x', 'Vous avez gagné', [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {text: 'OK'},
+      ]);
     }
   }
   move(direction) {
