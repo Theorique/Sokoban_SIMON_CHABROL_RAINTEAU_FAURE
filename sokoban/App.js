@@ -5,9 +5,10 @@ import {
   Text,
   TouchableOpacity,
   Image,
-  View, ImageBackground,
+  View,
+  ImageBackground,
   FlatList,
-  SafeAreaView, Alert,
+  SafeAreaView,
 } from "react-native";
 
 class App extends Component {
@@ -53,13 +54,7 @@ class App extends Component {
     });
     this.setState({ plateau: tab });
     if (win) {
-      Alert.alert('Sokoban niveau x', 'Vous avez gagné', [
-        {
-          text: 'Cancel',
-          style: 'cancel',
-        },
-        {text: 'OK'},
-      ]);
+      console.log("Vous avez gagné");
     }
   }
   move(direction) {
@@ -100,6 +95,13 @@ class App extends Component {
                   return (
                     <ImageBackground
                       source={require("./wall.png")}
+                      style={styles.wall}
+                    ></ImageBackground>
+                  );
+                } else if (item2[0] === "P") {
+                  return (
+                    <ImageBackground
+                      source={require("./assasin.png")}
                       style={styles.wall}
                     ></ImageBackground>
                   );
@@ -151,7 +153,7 @@ const styles = StyleSheet.create({
   up: {
     backgroundColor: "lightgrey",
     position: "absolute",
-    bottom: -190,
+    bottom: -101,
     left: -20,
     width: 50,
     transform: [{ rotate: "270deg" }],
@@ -161,7 +163,7 @@ const styles = StyleSheet.create({
   right: {
     backgroundColor: "lightgrey",
     position: "absolute",
-    bottom: -250,
+    bottom: -160,
     width: 50,
     height: 50,
     left: 40,
@@ -170,7 +172,7 @@ const styles = StyleSheet.create({
   down: {
     backgroundColor: "lightgrey",
     position: "absolute",
-    bottom: -310,
+    bottom: -220,
     width: 50,
     left: -20,
     transform: [{ rotate: "90deg" }],
@@ -180,7 +182,7 @@ const styles = StyleSheet.create({
   left: {
     backgroundColor: "lightgrey",
     position: "absolute",
-    bottom: -250,
+    bottom: -160,
     width: 50,
     transform: [{ scaleX: -1 }],
     height: 50,
