@@ -5,7 +5,8 @@ import {
   Text,
   TouchableOpacity,
   Image,
-  View, ImageBackground,
+  View,
+  ImageBackground,
   FlatList,
   SafeAreaView,
 } from "react-native";
@@ -97,6 +98,13 @@ class App extends Component {
                       style={styles.wall}
                     ></ImageBackground>
                   );
+                } else if (item2[0] === "P") {
+                  return (
+                    <ImageBackground
+                      source={require("./assasin.png")}
+                      style={styles.wall}
+                    ></ImageBackground>
+                  );
                 } else {
                   return <Text style={styles.grid}>{item2[0]}</Text>;
                 }
@@ -145,7 +153,7 @@ const styles = StyleSheet.create({
   up: {
     backgroundColor: "lightgrey",
     position: "absolute",
-    bottom: -190,
+    bottom: -100,
     left: -20,
     width: 50,
     transform: [{ rotate: "270deg" }],
@@ -155,7 +163,7 @@ const styles = StyleSheet.create({
   right: {
     backgroundColor: "lightgrey",
     position: "absolute",
-    bottom: -250,
+    bottom: -160,
     width: 50,
     height: 50,
     left: 40,
@@ -164,7 +172,7 @@ const styles = StyleSheet.create({
   down: {
     backgroundColor: "lightgrey",
     position: "absolute",
-    bottom: -310,
+    bottom: -220,
     width: 50,
     left: -20,
     transform: [{ rotate: "90deg" }],
@@ -174,7 +182,7 @@ const styles = StyleSheet.create({
   left: {
     backgroundColor: "lightgrey",
     position: "absolute",
-    bottom: -250,
+    bottom: -160,
     width: 50,
     transform: [{ scaleX: -1 }],
     height: 50,
