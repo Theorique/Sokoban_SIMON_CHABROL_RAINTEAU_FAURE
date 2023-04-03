@@ -18,6 +18,9 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.loadBoard();
+  }
+  loadBoard() {
     const customData = require("./plateau/plateau-dur.json");
     let temp = customData["text"].split("\n");
     let cible = [];
@@ -80,6 +83,11 @@ class App extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <View style={styles.menuTop}>
+          <TouchableOpacity activeOpacity={0.5} onPress={() => this.loadBoard()}>
+            <Image source={require("./refresh.png")} style={styles.refresh} />
+          </TouchableOpacity>
+        </View>
         <Text>{this.state.plateau["text"]}</Text>
         <FlatList
           data={this.state.plateau}
@@ -148,16 +156,16 @@ class App extends Component {
             />
           )}
         />
-        <TouchableOpacity activeOpacity={0.5} onPress={() => this.move(-9)}>
+        <TouchableOpacity activeOpacity={0.8} onPress={() => this.move(-9)}>
           <Image source={require("./next.png")} style={styles.up} />
         </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.5} onPress={() => this.move(1)}>
+        <TouchableOpacity activeOpacity={0.8} onPress={() => this.move(1)}>
           <Image source={require("./next.png")} style={styles.right} />
         </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.5} onPress={() => this.move(9)}>
+        <TouchableOpacity activeOpacity={0.8} onPress={() => this.move(9)}>
           <Image source={require("./next.png")} style={styles.down} />
         </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.5} onPress={() => this.move(-1)}>
+        <TouchableOpacity activeOpacity={0.8} onPress={() => this.move(-1)}>
           <Image source={require("./next.png")} style={styles.left} />
         </TouchableOpacity>
       </View>
@@ -168,8 +176,23 @@ class App extends Component {
 export default App;
 
 const styles = StyleSheet.create({
+  menuTop: {
+    marginTop: 40,
+    backgroundColor: "black",
+    height: 60,
+    width: "100%",
+    position: "absolute",
+    top: 0,
+  },
+  refresh: {
+    position: "absolute",
+    right:0,
+    transform: [{ scaleX: -1}, { rotate: "30deg" }],
+    width: 60,
+    height: 60,
+  },
   container: {
-    marginTop: 250,
+    paddingTop: 250,
     justifyContent: "center",
     alignContent: "center",
     alignItems: "center",
@@ -189,7 +212,7 @@ const styles = StyleSheet.create({
   up: {
     backgroundColor: "lightgrey",
     position: "absolute",
-    bottom: -101,
+    bottom: -100,
     left: -20,
     width: 50,
     transform: [{ rotate: "270deg" }],
