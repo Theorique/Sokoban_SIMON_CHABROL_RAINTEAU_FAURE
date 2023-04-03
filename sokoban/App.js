@@ -1,11 +1,19 @@
 import { StatusBar } from "expo-status-bar";
 import React, { Component, useDebugValue, useState } from "react";
-import { StyleSheet, Text, View, FlatList, SafeAreaView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  Image,
+  View, ImageBackground,
+  FlatList,
+  SafeAreaView,
+} from "react-native";
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { plateau: ["ok"], joueur: null, playerPos: 0, cibles: []};
+    this.state = { plateau: ["ok"], joueur: null, playerPos: 0, cibles: [] };
   }
 
   componentDidMount() {
@@ -43,8 +51,8 @@ class App extends Component {
         this.findWithId(item, tab)[0] = "x";
       }
     });
-    this.setState({ plateau: tab});
-    if(win){
+    this.setState({ plateau: tab });
+    if (win) {
       console.log("Vous avez gagné");
     }
   }
@@ -81,24 +89,33 @@ class App extends Component {
               data={item.item}
               numColumns={9}
               keyExtractor={(item2, index2) => `${item.id}*9+${index2}`}
-              renderItem={({ item: item2 }) => (
-                <Text style={styles.grid}>{item2[0]}</Text>
-              )}
+              renderItem={({ item: item2 }) => {
+                if (item2[0] === "#") {
+                  return (
+                    <ImageBackground
+                      source={require("./wall.png")}
+                      style={styles.wall}
+                    ></ImageBackground>
+                  );
+                } else {
+                  return <Text style={styles.grid}>{item2[0]}</Text>;
+                }
+              }}
             />
           )}
         />
-        <Text onPress={() => this.move(-9)} style={styles.up}>
-          up
-        </Text>
-        <Text onPress={() => this.move(1)} style={styles.right}>
-          right
-        </Text>
-        <Text onPress={() => this.move(9)} style={styles.down}>
-          down
-        </Text>
-        <Text onPress={() => this.move(-1)} style={styles.left}>
-          left
-        </Text>
+        <TouchableOpacity activeOpacity={0.5} onPress={() => this.move(-9)}>
+          <Image source={require("./next.png")} style={styles.up} />
+        </TouchableOpacity>
+        <TouchableOpacity activeOpacity={0.5} onPress={() => this.move(1)}>
+          <Image source={require("./next.png")} style={styles.right} />
+        </TouchableOpacity>
+        <TouchableOpacity activeOpacity={0.5} onPress={() => this.move(9)}>
+          <Image source={require("./next.png")} style={styles.down} />
+        </TouchableOpacity>
+        <TouchableOpacity activeOpacity={0.5} onPress={() => this.move(-1)}>
+          <Image source={require("./next.png")} style={styles.left} />
+        </TouchableOpacity>
       </View>
     );
   }
@@ -108,37 +125,61 @@ export default App;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    marginTop: 250,
     justifyContent: "center",
     alignContent: "center",
     alignItems: "center",
     backgroundColor: "#fff",
   },
   grid: {
-    width: 13,
+    width: 23,
+    height: 23,
+    textAlign: "center",
+  },
+  wall: {
+    width: 23,
+    height: 23,
+    backgroundImage: require("./wall.png"),
+    resizeMode: "cover",
   },
   up: {
-    backgroundColor: "blue",
-    color: "white",
-    margin: 10,
+    backgroundColor: "lightgrey",
+    position: "absolute",
+    bottom: -190,
+    left: -20,
+    width: 50,
+    transform: [{ rotate: "270deg" }],
+    height: 50,
     padding: 10,
   },
   right: {
-    backgroundColor: "blue",
-    color: "white",
-    margin: 10,
+    backgroundColor: "lightgrey",
+    position: "absolute",
+    bottom: -250,
+    width: 50,
+    height: 50,
+    left: 40,
     padding: 10,
   },
   down: {
-    backgroundColor: "blue",
-    color: "white",
-    margin: 10,
+    backgroundColor: "lightgrey",
+    position: "absolute",
+    bottom: -310,
+    width: 50,
+    left: -20,
+    transform: [{ rotate: "90deg" }],
+    height: 50,
     padding: 10,
   },
   left: {
-    backgroundColor: "blue",
-    color: "white",
-    margin: 10,
+    backgroundColor: "lightgrey",
+    position: "absolute",
+    bottom: -250,
+    width: 50,
+    transform: [{ scaleX: -1 }],
+    height: 50,
+    left: -80,
     padding: 10,
+    zIndex: -1,
   },
 });
