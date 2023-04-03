@@ -101,7 +101,43 @@ class App extends Component {
                 } else if (item2[0] === "P") {
                   return (
                     <ImageBackground
-                      source={require("./assasin.png")}
+                      source={require("./tile.png")}
+                      style={styles.wall}
+                    >
+                      <ImageBackground
+                        source={require("./assasin.png")}
+                        style={styles.wall}
+                      ></ImageBackground>
+                    </ImageBackground>
+                  );
+                } else if (item2[0] === "C") {
+                  return (
+                    <ImageBackground
+                      source={require("./tile.png")}
+                      style={styles.wall}
+                    >
+                      <ImageBackground
+                        source={require("./crate.png")}
+                        style={styles.wall}
+                      ></ImageBackground>
+                    </ImageBackground>
+                  );
+                } else if (item2[0] === "x") {
+                  return (
+                    <ImageBackground
+                      source={require("./tile.png")}
+                      style={styles.wall}
+                    >
+                      <ImageBackground
+                        source={require("./target.png")}
+                        style={styles.wall}
+                      ></ImageBackground>
+                    </ImageBackground>
+                  );
+                } else if (item2[0] === ".") {
+                  return (
+                    <ImageBackground
+                      source={require("./tile.png")}
                       style={styles.wall}
                     ></ImageBackground>
                   );
@@ -140,13 +176,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   grid: {
-    width: 23,
-    height: 23,
+    width: 30,
+    height: 30,
     textAlign: "center",
   },
   wall: {
-    width: 23,
-    height: 23,
+    width: 30,
+    height: 30,
     backgroundImage: require("./wall.png"),
     resizeMode: "cover",
   },
