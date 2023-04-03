@@ -84,8 +84,7 @@ class App extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.menuTop}>
-          
-          <TouchableOpacity activeOpacity={0.5} onPress={() => this.loadBoard()}>
+          <TouchableOpacity activeOpacity={1} onPress={() => this.loadBoard()}>
             <Image source={require("./refresh.png")} style={styles.refresh} />
           </TouchableOpacity>
         </View>
@@ -157,16 +156,16 @@ class App extends Component {
             />
           )}
         />
-        <TouchableOpacity activeOpacity={0.8} onPress={() => this.move(-9)}>
+        <TouchableOpacity activeOpacity={1} onPress={() => this.move(-9)}>
           <Image source={require("./next.png")} style={styles.up} />
         </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.8} onPress={() => this.move(1)}>
+        <TouchableOpacity activeOpacity={1} onPress={() => this.move(1)}>
           <Image source={require("./next.png")} style={styles.right} />
         </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.8} onPress={() => this.move(9)}>
+        <TouchableOpacity activeOpacity={1} onPress={() => this.move(9)}>
           <Image source={require("./next.png")} style={styles.down} />
         </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.8} onPress={() => this.move(-1)}>
+        <TouchableOpacity activeOpacity={1} onPress={() => this.move(-1)}>
           <Image source={require("./next.png")} style={styles.left} />
         </TouchableOpacity>
       </View>
