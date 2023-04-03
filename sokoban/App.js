@@ -84,6 +84,7 @@ class App extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.menuTop}>
+          
           <TouchableOpacity activeOpacity={0.5} onPress={() => this.loadBoard()}>
             <Image source={require("./refresh.png")} style={styles.refresh} />
           </TouchableOpacity>
