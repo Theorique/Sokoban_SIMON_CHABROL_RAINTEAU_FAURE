@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b1102b78-d7cb-4c33-86c4-5a48d815ca29" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sokoban/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/sokoban/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sokoban/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sokoban/android/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sokoban/composants/UploadFiles.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sokoban/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sokoban/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/sokoban/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sokoban/plateau/plateau-dur.json" beforeDir="false" afterPath="$PROJECT_DIR$/sokoban/public/plateau-dur.json" afterDir="false" />
-    </list>
+    <list default="true" id="b1102b78-d7cb-4c33-86c4-5a48d815ca29" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -69,7 +61,7 @@
       <workItem from="1678715201623" duration="3844000" />
       <workItem from="1678720604594" duration="4539000" />
       <workItem from="1678865077113" duration="5428000" />
-      <workItem from="1680523670756" duration="2397000" />
+      <workItem from="1680523670756" duration="2705000" />
     </task>
     <servers />
   </component>
