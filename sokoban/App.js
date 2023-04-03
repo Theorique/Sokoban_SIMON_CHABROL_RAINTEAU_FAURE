@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
   up: {
     backgroundColor: "lightgrey",
     position: "absolute",
-    bottom: -100,
+    bottom: -101,
     left: -20,
     width: 50,
     transform: [{ rotate: "270deg" }],
