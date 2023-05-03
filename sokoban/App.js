@@ -1,21 +1,41 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import React, { Component, useDebugValue, useState } from "react";
+import Accueil from "./pages/Accueil";
+import Partie from "./pages/Partie";
+import { NavigationContainer } from "@react-navigation/native";
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  Image,
+  View,
+  ImageBackground,
+  FlatList,
+  SafeAreaView,
+} from "react-native";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {}
+  render() {
+    const Stack = createNativeStackNavigator();
+    return (
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Accueil">
+            <Stack.Screen
+              name="Partie"
+              component={Partie}
+              options={{ title: "Partie" }}
+            />
+            <Stack.Screen name="Accueil" component={Accueil} />
+          </Stack.Navigator>
+        </NavigationContainer>
+    );
+  }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
