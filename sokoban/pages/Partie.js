@@ -14,14 +14,25 @@ import {
 class Partie extends Component {
   constructor(props) {
     super(props);
-    this.state = { plateau: ["ok"], joueur: null, playerPos: 0, cibles: [], fichier: route.params };
+    this.state = { plateau: ["ok"], joueur: null, playerPos: 0, cibles: [] };
   }
 
   componentDidMount() {
     this.loadBoard();
   }
   loadBoard() {
-    const customData = require("../plateau/plateau-1.json");
+    let customData = null;
+    switch(this.props.route.params.name){
+        case "plateau-1.json":
+            customData = require("../plateau/plateau-1.json");
+            break;
+        case "plateau-2.json":
+            customData = require("../plateau/plateau-2.json");
+            break;
+        default:
+            customData = require("../plateau/plateau-1.json");
+            break;
+    }
     let temp = customData["text"].split("\n");
     let cible = [];
     let plat = [];
