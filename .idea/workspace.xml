@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b1102b78-d7cb-4c33-86c4-5a48d815ca29" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/sokoban/refresh.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sokoban/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/sokoban/App.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -66,7 +66,7 @@
       <workItem from="1678720604594" duration="4539000" />
       <workItem from="1678865077113" duration="5428000" />
       <workItem from="1680523670756" duration="10848000" />
-      <workItem from="1683095240027" duration="313000" />
+      <workItem from="1683095240027" duration="2881000" />
     </task>
     <servers />
   </component>
