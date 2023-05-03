@@ -8,8 +8,9 @@ import {
   View,
   ImageBackground,
   FlatList,
-  SafeAreaView,
+  SafeAreaView, Alert,
 } from "react-native";
+import {Picker} from '@react-native-picker/picker';
 
 class App extends Component {
   constructor(props) {
