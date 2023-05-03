@@ -45,7 +45,7 @@ class BoardsList extends Component {
                     <View>
                         <Table>
                             <Row data={state.headTable} widthArr={state.widthArr} style={styles.head}
-                                 textStyle={styles.textHead}
+
                             />
                         </Table>
                         <ScrollView style={styles.dataWrapper}>
@@ -58,7 +58,7 @@ class BoardsList extends Component {
                                             data={dataRow}
                                             widthArr={state.widthArr}
                                             style={[styles.row, index % 2 && {backgroundColor: '#ffffff'}]}
-                                            textStyle={styles.text}
+
                                         />
                                     </TouchableOpacity>
                                 ))}
