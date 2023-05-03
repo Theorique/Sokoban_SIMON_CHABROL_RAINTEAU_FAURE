@@ -6,7 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="b1102b78-d7cb-4c33-86c4-5a48d815ca29" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sokoban/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/sokoban/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sokoban/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/sokoban/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sokoban/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/sokoban/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sokoban/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/sokoban/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sokoban/pages/Accueil.js" beforeDir="false" afterPath="$PROJECT_DIR$/sokoban/pages/Accueil.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sokoban/pages/Admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/sokoban/pages/Admin.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +45,7 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;AndroidSdkUpdater&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\IntelliJ IDEA 2022.3.2\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -66,7 +72,8 @@
       <workItem from="1678720604594" duration="4539000" />
       <workItem from="1678865077113" duration="5428000" />
       <workItem from="1680523670756" duration="10848000" />
-      <workItem from="1683095240027" duration="2881000" />
+      <workItem from="1683095240027" duration="11283000" />
+      <workItem from="1683108041613" duration="3856000" />
     </task>
     <servers />
   </component>

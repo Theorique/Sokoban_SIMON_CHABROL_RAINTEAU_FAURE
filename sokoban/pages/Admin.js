@@ -4,21 +4,22 @@ import {FlatList, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 class Admin extends Component {
 
     render() {
+        const {navigation} = this.props;
+
         return (
             <View style={styles.container}>
                 <Text style={styles.title}>ADMINISTRATION INTERFACE - USE WITH CAUTION</Text>
-                <FlatList style={styles.list}
-                          data={[
-                              {key: '1. List boards'},
-                              {key: '2. Remove board from database [DANGEROUS]'},
-                              {key: '3. Quit'},
-                          ]}
-                          renderItem={({item}) =>
-                              <TouchableOpacity style={styles.item}>
-                                  <Text style={styles.textButton}>{item.key}</Text>
-                              </TouchableOpacity>
-                          }
-                />
+                <TouchableOpacity style={styles.button} onPress={() =>
+                    navigation.navigate('BoardsList', {name: 'BoardsList'})
+                }>
+                    <Text style={styles.textButton}>1. List boards</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button}>
+                    <Text style={styles.textButton}>2. Remove board from database [DANGEROUS]</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button}>
+                    <Text style={styles.textButton}>3. Quit</Text>
+                </TouchableOpacity>
             </View>
         )
     }
@@ -37,15 +38,20 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 20,
         textAlign: "center",
-        marginBottom: 150
+        marginBottom: 50
     },
-    item: {
+    button: {
         paddingTop: 10,
         paddingBottom: 10,
         marginTop: 5,
-        marginBottom: 5,
+        backgroundColor: "#5D7DFC",
+        width: 250,
+        alignItems: "center",
+        borderRadius: 10
     },
     textButton: {
-        fontSize: 16
+        fontSize: 16,
+        color: "white",
+        textAlign: "center"
     }
 });
