@@ -14,11 +14,16 @@ class Admin extends Component {
                 }>
                     <Text style={styles.textButton}>1. List boards</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.textButton}>2. Remove board from database [DANGEROUS]</Text>
+                <TouchableOpacity style={styles.button} onPress={() =>
+                    navigation.navigate('AddBoard', {name: 'AddBoard'})
+                }>
+                    <Text style={styles.textButton}>2. Add new board</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.button}>
-                    <Text style={styles.textButton}>3. Quit</Text>
+                    <Text style={styles.textButton}>3. Remove board from database [DANGEROUS]</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button}>
+                    <Text style={styles.textButton}>4. Quit</Text>
                 </TouchableOpacity>
             </View>
         )

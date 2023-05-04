@@ -7,6 +7,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Admin from "./pages/Admin.js";
 import BoardsList from "./pages/BoardsList";
 import ShowBoard from "./pages/ShowBoard";
+import AddBoard from "./pages/AddBoard";
 
 class App extends Component {
     constructor(props) {
@@ -27,6 +28,7 @@ class App extends Component {
                     <Stack.Screen name="Admin" component={Admin}/>
                     <Stack.Screen name="BoardsList" component={BoardsList}/>
                     <Stack.Screen name="ShowBoard" component={ShowBoard}/>
+                    <Stack.Screen name="AddBoard" component={AddBoard}/>
                 </Stack.Navigator>
             </NavigationContainer>
         );

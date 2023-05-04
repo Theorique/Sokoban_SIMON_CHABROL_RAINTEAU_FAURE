@@ -20,6 +20,7 @@ class Partie extends Component {
   componentDidMount() {
     this.loadBoard();
   }
+
   loadBoard() {
     let customData = null;
     switch(this.props.route.params.name){
