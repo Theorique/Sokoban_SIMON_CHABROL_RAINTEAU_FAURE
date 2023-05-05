@@ -8,7 +8,9 @@ class AddBoard extends Component {
         this.state = {
             name: '',
             board_id: '',
-            rows: []
+            rows: [],
+            nbRows: 0,
+            nbCols: 0,
         }
     }
 
@@ -25,9 +27,14 @@ class AddBoard extends Component {
             body: JSON.stringify({
                 boardId: state.boardId,
                 name: state.name,
-                rows: state.rows
-                // TODO rajouter les champs manquants
+                rows: state.rows,
+                nbRows: state.nbRows,
+                nbCols: state.nbCols
             }),
+        }).then((result) => {
+            if (result.status !== 200) {
+                Alert.alert('Error', 'Fetching API failed : error ' + result.status);
+            }
         })
     }
 
@@ -51,11 +58,16 @@ class AddBoard extends Component {
                     }}
                     style={styles.input}
                 />
-                <Text style={styles.label}>Board content (separated by comas)</Text>
+                <Text style={styles.label}>Board content (rows separated by comas)</Text>
                 <TextInput
                     placeholder="ex : '###, #x#, #C#, #P#'"
                     onChangeText={(text) => {
-                        this.setState({rows: text.split(',')})
+                        this.setState({
+                            rows: text.split(',')
+                        }, () => {
+                            this.setState({nbRows: this.state.rows.reduce((max, element) => Math.max(max, element.length), 0)} );
+                            this.setState({nbCols: this.state.rows.length} )
+                        })
                     }}
                     style={styles.input}
                 />
