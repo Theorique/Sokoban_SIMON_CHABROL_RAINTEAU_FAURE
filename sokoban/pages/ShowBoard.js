@@ -1,45 +1,35 @@
-import {StatusBar} from "expo-status-bar";
-import React, {Component, useDebugValue, useState} from "react";
-import {
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    Image,
-    View,
-    ImageBackground,
-    FlatList,
-    SafeAreaView, Alert,
-} from "react-native";
+import React, {Component} from "react";
+import {FlatList, Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 
-class Partie extends Component {
+class ShowBoard extends Component {
+
     constructor(props) {
         super(props);
-        this.state = {plateau: ["ok"], joueur: null, playerPos: 0, cibles: []};
+        this.state = {
+            boardTemp: [],
+            board: [],
+            cibles: []
+        }
     }
 
     componentDidMount() {
-        this.loadBoard();
+        const ip = require("../configAPI.json")['ip'];
+        fetch("http://" + ip + ":3001/boards/" + this.props.route.params.boardId).then((result) => {
+            return result.json();
+        }).then((board) => {
+            this.setState({boardTemp: board.result});
+            this.loadBoard();
+        })
     }
 
     loadBoard() {
-        let customData = null;
-        switch (this.props.route.params.name) {
-            case "plateau-1.json":
-                customData = require("../plateau/plateau-1.json");
-                break;
-            case "plateau-2.json":
-                customData = require("../plateau/plateau-2.json");
-                break;
-            default:
-                customData = require("../plateau/plateau-1.json");
-                break;
-        }
-        let temp = customData["text"].split("\n");
-        let cible = [];
+        const board = this.state.boardTemp['text'].split('\n');
         let plat = [];
-        temp.map((value, key) => {
+        let cible = [];
+
+        board.map((value, key) => {
             let ligne = value.split("");
-            const dataWithKeys = ligne.map((item, key2) => {
+            plat[key] = ligne.map((item, key2) => {
                 id = key * 9 + key2;
                 if (item === "P") {
                     this.setState({playerPos: id});
@@ -49,77 +39,16 @@ class Partie extends Component {
                 }
                 return {...item, key: id};
             });
-            plat[key] = dataWithKeys;
         });
-        this.setState({plateau: plat, cibles: cible});
-    }
-
-    findWithId(id, tab) {
-        return tab[(id / 9) >> 0].find((item) => item.key === id);
-    }
-
-    checkTarget() {
-        let win = true;
-        let tab = this.state.plateau;
-        this.state.cibles.map((item) => {
-            if (this.findWithId(item, tab)[0] !== "C") {
-                win = false;
-            }
-            if (this.findWithId(item, tab)[0] === ".") {
-                this.findWithId(item, tab)[0] = "x";
-            }
-        });
-
-        this.setState({plateau: tab});
-
-        if (win) {
-            const {navigation} = this.props;
-
-            Alert.alert('Well done !', 'Level ' + '' + ' completed', [
-                {
-                    text: 'Back to the menu',
-                    onPress: () => { navigation.navigate('Accueil'); }
-                },
-                {
-                    text: 'Back to level list',
-                    onPress: () => { navigation.navigate('BoardsList', {name: 'BoardsList'} ); }
-                }
-            ])
-        }
-    }
-
-    move(direction) {
-        let tab = this.state.plateau;
-        let p = this.state.playerPos;
-        let devant = this.findWithId(p + direction, this.state.plateau)[0];
-        if (devant === "." || devant === "x") {
-            this.findWithId(p + direction, tab)[0] = "P";
-            this.findWithId(p, tab)[0] = ".";
-            this.setState({plateau: tab, playerPos: p + direction});
-        } else if (
-            devant === "C" &&
-            (this.findWithId(p + 2 * direction, this.state.plateau)[0] === "." ||
-                this.findWithId(p + 2 * direction, this.state.plateau)[0] === "x")
-        ) {
-            this.findWithId(p + direction, tab)[0] = "P";
-            this.findWithId(p + 2 * direction, tab)[0] = "C";
-            this.findWithId(p, tab)[0] = ".";
-            this.setState({plateau: tab, playerPos: p + direction});
-        }
-        this.checkTarget();
+        this.setState({board: plat, cibles: cible});
     }
 
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.menuTop}>
-                    <TouchableOpacity activeOpacity={1} onPress={() => this.loadBoard()}>
-                        <Image source={require("../images/refresh.png")} style={styles.refresh}/>
-                    </TouchableOpacity>
-                </View>
-                <Text>{this.state.plateau["text"]}</Text>
+                <Text>{this.state.board["text"]}</Text>
                 <FlatList
-                    data={this.state.plateau}
+                    data={this.state.board}
                     numColumns={1}
                     keyExtractor={(item, index) => `${item.id}-${index}`}
                     renderItem={(item) => (
@@ -185,34 +114,14 @@ class Partie extends Component {
                         />
                     )}
                 />
-                <TouchableOpacity activeOpacity={1} onPress={() => this.move(-9)}>
-                    <Image source={require("../images/next.png")} style={styles.up}/>
-                </TouchableOpacity>
-                <TouchableOpacity activeOpacity={1} onPress={() => this.move(1)}>
-                    <Image source={require("../images/next.png")} style={styles.right}/>
-                </TouchableOpacity>
-                <TouchableOpacity activeOpacity={1} onPress={() => this.move(9)}>
-                    <Image source={require("../images/next.png")} style={styles.down}/>
-                </TouchableOpacity>
-                <TouchableOpacity activeOpacity={1} onPress={() => this.move(-1)}>
-                    <Image source={require("../images/next.png")} style={styles.left}/>
-                </TouchableOpacity>
             </View>
         );
     }
 }
 
-export default Partie;
+export default ShowBoard;
 
 const styles = StyleSheet.create({
-    menuTop: {
-        marginTop: 0,
-        backgroundColor: "black",
-        height: 60,
-        width: "100%",
-        position: "absolute",
-        top: 0,
-    },
     refresh: {
         position: "absolute",
         right: 0,

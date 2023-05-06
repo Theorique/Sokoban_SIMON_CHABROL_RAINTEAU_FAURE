@@ -27,32 +27,8 @@ class Accueil extends Component {
     this.loadListe();
   }
 
-  request() {
-    console.log("test mec");
-    const ip = require('../configAPI.json').ip
-    fetch("http://" + ip + ":3001/boards")
-
-      .then((response) => {
-        console.log(response);
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data);
-        this.setState({ niveau: data })
-
-      })
-      .catch((err) => {
-        //  console.log("error", err.message);
-      });
-  }
-
   loadListe() {
     const titre = {};
-
-    for (let userObjetc of this.state.niveau) {
-      console.log("C EST LA MERDE");
-      console.log(userObjetc);
-    }
     titre["plateau-1.json"] = require("../plateau/plateau-1.json")["Titre"];
     titre["plateau-2.json"] = require("../plateau/plateau-2.json")["Titre"];
     this.setState({ titres: titre });
@@ -61,32 +37,49 @@ class Accueil extends Component {
 
 
   render() {
-    if (!this.state.titres || !this.state.plateaux) {
-      return null; // Ou peut-être vous pouvez afficher un indicateur de chargement ici
-    }
-
     const { navigation } = this.props;
     console.log("entré dans list");
 
     //console.log(this.state.niveau);
 
     return (
-      <View>
-
-        <FlatList
-          keyExtractor={(item) => item}
-          data={this.state.plateaux}
-          numColumns={1}
-          renderItem={({ item }) => (
-            <Button
-              title={this.state.titres[item] + ""}
-              onPress={() => navigation.navigate("Partie", { name: item })}
-            ></Button>
-          )}
-        ></FlatList>
-      </View >
+        <View style={styles.container}>
+          <TouchableOpacity style={styles.button} onPress={() =>
+              navigation.navigate('Partie', {name: 'Partie'})
+          }>
+            <Text style={styles.textButton}>CHARGER LE DERNIER NIVEAU</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={() =>
+              navigation.navigate('Admin', {name: 'Admin'})
+          }>
+            <Text style={styles.textButton}>ADMIN</Text>
+          </TouchableOpacity>
+        </View>
     );
   }
 }
 
 export default Accueil;
+
+const styles = StyleSheet.create({
+    container: {
+        width: "80%",
+        alignItems: "center",
+        marginLeft: "auto",
+        marginRight: "auto"
+    },
+    button: {
+        paddingTop: 10,
+        paddingBottom: 10,
+        marginTop: 5,
+        backgroundColor: "#5D7DFC",
+        width: 250,
+        alignItems: "center",
+        borderRadius: 10
+    },
+    textButton: {
+        fontSize: 16,
+        color: "white",
+        textAlign: "center"
+    }
+});
