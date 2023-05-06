@@ -38,7 +38,7 @@ class Accueil extends Component {
       })
       .then((data) => {
         console.log(data);
-        this.setState({ niveau: data[0] })
+        this.setState({ niveau: data })
 
       })
       .catch((err) => {
