@@ -1,5 +1,5 @@
 import {Component} from "react";
-import {ScrollView, Text, View, StyleSheet, TouchableOpacity} from "react-native";
+import {ScrollView, Text, View, StyleSheet, TouchableOpacity, Alert} from "react-native";
 import {Row, Table} from "react-native-table-component";
 
 class BoardsList extends Component {
@@ -10,11 +10,16 @@ class BoardsList extends Component {
         this.state = {
             headTable: ['Difficulty', 'Name', 'Rows', 'Cols'],
             widthArr: [120, 190, 50, 50],
-            boards: []
+            boards: [],
+            delete: false
         }
     }
 
     componentDidMount() {
+        if (this.props.route.params.delete === true) {
+            this.setState({delete: true});
+        }
+
         const ip = require("../configAPI.json")['ip'];
         fetch("http://" + ip + ":3001/boards").then((result) => {
             return result.json();
@@ -23,10 +28,34 @@ class BoardsList extends Component {
         })
     }
 
+    deleteLevel(boardId) {
+        const ip = require("../configAPI.json")['ip'];
+        const {navigation} = this.props;
+
+        fetch("http://" + ip + ":3001/boards/" + boardId, {
+            method: 'DELETE'
+        }).then((result) => {
+            if (result.status !== 200) {
+                Alert.alert('Error', 'Fetching API failed : error ' + result.status);
+            } else {
+                Alert.alert('Success', 'The level was successfully deleted', [
+                    {
+                        text: 'Back to the menu',
+                        onPress: () => { navigation.navigate('Accueil'); }
+                    },
+                    {
+                        text: 'Back to level list',
+                        onPress: () => { navigation.navigate('BoardsList', {name: 'BoardsList'} ); }
+                    }
+                ])
+            }
+        })
+    }
+
     render() {
         const state = this.state;
-        const {navigation} = this.props;
         const data = [];
+        const {navigation} = this.props;
 
         for (let i = 0; i < state.boards.length; i++) {
             const dataRow = [];
@@ -40,19 +69,32 @@ class BoardsList extends Component {
         }
         return (
             <View>
-                <Text style={styles.title}>Cliquez sur un niveau pour le voir</Text>
+                <Text style={styles.title}>Click on a level to watch it</Text>
                 <ScrollView horizontal={true}>
                     <View>
                         <Table>
-                            <Row data={state.headTable} widthArr={state.widthArr} style={styles.head}
-
-                            />
+                            <Row data={state.headTable} widthArr={state.widthArr} style={styles.head}/>
                         </Table>
                         <ScrollView style={styles.dataWrapper}>
                             <Table>
                                 {data.map((dataRow, index) => (
                                     <TouchableOpacity style={styles.button}
-                                                      onPress={() => navigation.navigate('ShowBoard', {boardId: dataRow[0]})}>
+                                                      onPress={() => {
+                                                          if (this.state.delete === false) {
+                                                              navigation.navigate('ShowBoard', {boardId: dataRow[0]});
+                                                          } else {
+                                                              Alert.alert('Danger', 'Do you really want to delete this level ?', [
+                                                                  {
+                                                                      text: 'YES',
+                                                                      onPress: () => {this.deleteLevel(dataRow[0]) }
+                                                                  },
+                                                                  {
+                                                                      text: 'CANCEL',
+                                                                      onPress: () => { navigation.navigate('BoardsList', {name: 'BoardsList'}) }
+                                                                  }
+                                                              ]);
+                                                          }
+                                                      }}>
                                         <Row
                                             key={index}
                                             data={dataRow}

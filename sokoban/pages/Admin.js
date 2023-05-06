@@ -19,7 +19,9 @@ class Admin extends Component {
                 }>
                     <Text style={styles.textButton}>2. Add new board</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={() =>
+                    navigation.navigate('BoardsList', {name: 'BoardsList', delete: true})
+                }>
                     <Text style={styles.textButton}>3. Remove board from database [DANGEROUS]</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.button}>
