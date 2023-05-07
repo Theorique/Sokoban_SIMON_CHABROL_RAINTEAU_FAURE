@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b1102b78-d7cb-4c33-86c4-5a48d815ca29" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sokoban/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/sokoban/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sokoban/configAPI.json" beforeDir="false" afterPath="$PROJECT_DIR$/sokoban/configAPI.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sokoban/pages/Admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/sokoban/pages/Admin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sokoban/pages/BoardsList.js" beforeDir="false" afterPath="$PROJECT_DIR$/sokoban/pages/BoardsList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sokoban/pages/Partie.js" beforeDir="false" afterPath="$PROJECT_DIR$/sokoban/pages/Partie.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2MxhZSVnLE8aFNHTloCRosEc3pL" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;AndroidSdkUpdater&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\chabr\\OneDrive\\Documents\\LP\\Cours LP\\Progammation Mobile\\Sokoban_SIMON_CHABROL_RAINTEAU_FAURE\\sokoban\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\chabr\OneDrive\Documents\LP\Cours LP\Progammation Mobile\Sokoban_SIMON_CHABROL_RAINTEAU_FAURE\sokoban\plateau" />
+      <recent name="C:\Users\chabr\OneDrive\Documents\LP\Cours LP\Progammation Mobile\Sokoban_SIMON_CHABROL_RAINTEAU_FAURE\sokoban\public" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="cls" />
+    </option>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b1102b78-d7cb-4c33-86c4-5a48d815ca29" name="Changes" comment="" />
+      <created>1678715199583</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1678715199583</updated>
+      <workItem from="1678715201623" duration="3844000" />
+      <workItem from="1678720604594" duration="4539000" />
+      <workItem from="1678865077113" duration="5428000" />
+      <workItem from="1680523670756" duration="10848000" />
+      <workItem from="1683095240027" duration="11283000" />
+      <workItem from="1683108041613" duration="6147000" />
+      <workItem from="1683204078914" duration="850000" />
+      <workItem from="1683207258681" duration="8380000" />
+      <workItem from="1683361507871" duration="3151000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
