@@ -28,6 +28,7 @@ class Partie extends Component {
     this.loadBoard();
   }
   loadBoard() {
+    this.setState({ win: false });
     let customData = null;
     switch (this.props.route.params.name) {
       case "plateau-1.json":
@@ -178,20 +179,6 @@ class Partie extends Component {
             />
           )}
         />
-        {this.state.win ? (
-          <View style={styles.win}>
-            <Text style={styles.winT}>Vous avez gagné</Text>
-            <TouchableOpacity
-              style={styles.winB}
-              activeOpacity={1}
-              onPress={() => navigation.navigate("Accueil")}
-            >
-              <Image source={require("../images/home.png")} style={styles.home}/>
-            </TouchableOpacity>
-          </View>
-        ) : (
-          <View></View>
-        )}
         <TouchableOpacity activeOpacity={1} onPress={() => this.move(-9)}>
           <Image source={require("../images/next.png")} style={styles.up} />
         </TouchableOpacity>
@@ -212,31 +199,6 @@ class Partie extends Component {
 export default Partie;
 
 const styles = StyleSheet.create({
-  win: {
-    position: "relative",
-  },
-  winT: {
-    position: "absolute",
-    left: -100,
-    top: 15,
-    backgroundColor: "green",
-    color:"white",
-    padding:5,
-    fontWeight:"bold",
-    borderRadius:5,
-  },
-  winB: {
-    position: "absolute",
-    left: 50,
-    top: 10,
-    padding:5,
-    backgroundColor: "lightgrey",
-    borderRadius:5,
-  },
-  home:{
-    width: 30,
-    height: 30,
-  },
   menuTop: {
     marginTop: 0,
     backgroundColor: "black",
