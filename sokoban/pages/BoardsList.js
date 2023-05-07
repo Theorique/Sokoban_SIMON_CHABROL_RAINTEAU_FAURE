@@ -1,6 +1,6 @@
-import {Component} from "react";
-import {ScrollView, Text, View, StyleSheet, TouchableOpacity, Alert} from "react-native";
-import {Row, Table} from "react-native-table-component";
+import { Component } from "react";
+import { ScrollView, Text, View, StyleSheet, TouchableOpacity, Alert } from "react-native";
+import { Row, Table } from "react-native-table-component";
 
 class BoardsList extends Component {
 
@@ -17,20 +17,20 @@ class BoardsList extends Component {
 
     componentDidMount() {
         if (this.props.route.params.delete === true) {
-            this.setState({delete: true});
+            this.setState({ delete: true });
         }
 
         const ip = require("../configAPI.json")['ip'];
         fetch("http://" + ip + ":3001/boards").then((result) => {
             return result.json();
         }).then((boards) => {
-            this.setState({boards: boards})
+            this.setState({ boards: boards })
         })
     }
 
     deleteLevel(boardId) {
         const ip = require("../configAPI.json")['ip'];
-        const {navigation} = this.props;
+        const { navigation } = this.props;
 
         fetch("http://" + ip + ":3001/boards/" + boardId, {
             method: 'DELETE'
@@ -45,7 +45,7 @@ class BoardsList extends Component {
                     },
                     {
                         text: 'Back to level list',
-                        onPress: () => { navigation.navigate('BoardsList', {name: 'BoardsList'} ); }
+                        onPress: () => { navigation.navigate('BoardsList', { name: 'BoardsList' }); }
                     }
                 ])
             }
@@ -55,7 +55,7 @@ class BoardsList extends Component {
     render() {
         const state = this.state;
         const data = [];
-        const {navigation} = this.props;
+        const { navigation } = this.props;
 
         for (let i = 0; i < state.boards.length; i++) {
             const dataRow = [];
@@ -73,33 +73,33 @@ class BoardsList extends Component {
                 <ScrollView horizontal={true}>
                     <View>
                         <Table>
-                            <Row data={state.headTable} widthArr={state.widthArr} style={styles.head}/>
+                            <Row data={state.headTable} widthArr={state.widthArr} style={styles.head} />
                         </Table>
                         <ScrollView style={styles.dataWrapper}>
                             <Table>
                                 {data.map((dataRow, index) => (
                                     <TouchableOpacity style={styles.button}
-                                                      onPress={() => {
-                                                          if (this.state.delete === false) {
-                                                              navigation.navigate('ShowBoard', {boardId: dataRow[0]});
-                                                          } else {
-                                                              Alert.alert('Danger', 'Do you really want to delete this level ?', [
-                                                                  {
-                                                                      text: 'YES',
-                                                                      onPress: () => {this.deleteLevel(dataRow[0]) }
-                                                                  },
-                                                                  {
-                                                                      text: 'CANCEL',
-                                                                      onPress: () => { navigation.navigate('BoardsList', {name: 'BoardsList'}) }
-                                                                  }
-                                                              ]);
-                                                          }
-                                                      }}>
+                                        onPress={() => {
+                                            if (this.state.delete === false) {
+                                                navigation.navigate('ShowBoard', { boardId: dataRow[0] });
+                                            } else {
+                                                Alert.alert('Danger', 'Do you really want to delete this level ?', [
+                                                    {
+                                                        text: 'YES',
+                                                        onPress: () => { this.deleteLevel(dataRow[0]) }
+                                                    },
+                                                    {
+                                                        text: 'CANCEL',
+                                                        onPress: () => { navigation.navigate('BoardsList', { name: 'BoardsList' }) }
+                                                    }
+                                                ]);
+                                            }
+                                        }}>
                                         <Row
                                             key={index}
                                             data={dataRow}
                                             widthArr={state.widthArr}
-                                            style={[styles.row, index % 2 && {backgroundColor: '#ffffff'}]}
+                                            style={[styles.row, index % 2 && { backgroundColor: '#ffffff' }]}
 
                                         />
                                     </TouchableOpacity>
