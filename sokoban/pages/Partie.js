@@ -5,6 +5,7 @@ import {
     Text,
     TouchableOpacity,
     Image,
+    Button,
     View,
     ImageBackground,
     FlatList,
@@ -14,7 +15,13 @@ import {
 class Partie extends Component {
     constructor(props) {
         super(props);
-        this.state = { plateau: ["ok"], playerPos: 0, cibles: [], tableau: {} };
+        this.state = {
+            plateau: ["ok"],
+
+            playerPos: 0,
+            cibles: [], tableau: {},
+            win: false,
+        };
     }
 
     componentDidMount() {
@@ -37,7 +44,9 @@ class Partie extends Component {
             });
 
     }
+
     loadBoard() {
+        this.setState({ win: false });
         let customData = this.state.tableau.result.text;
         let temp = customData.split("\n");
         let cible = [];
@@ -64,7 +73,7 @@ class Partie extends Component {
     }
 
     checkTarget() {
-        let win = true;
+        this.setState({ win: true });
         let tab = this.state.plateau;
         this.state.cibles.map((item) => {
             if (this.findWithId(item, tab)[0] !== "C") {
@@ -77,7 +86,7 @@ class Partie extends Component {
 
         this.setState({ plateau: tab });
 
-        if (win) {
+        if (thiq.state.win) {
             const { navigation } = this.props;
 
             Alert.alert('Well done !', 'Level ' + '' + ' completed', [
@@ -115,6 +124,7 @@ class Partie extends Component {
     }
 
     render() {
+        const { navigation } = this.props;
         if (this.state.tableau.result == undefined) {
             return (
                 <View style={styles.container}>
@@ -131,7 +141,9 @@ class Partie extends Component {
                 <View style={styles.container}>
                     <View style={styles.menuTop}>
                         <TouchableOpacity activeOpacity={1} onPress={() => this.loadBoard()}>
-                            <Image source={require("../images/refresh.png")} style={styles.refresh} />
+                            <Image
+                                source={require("../images/refresh.png")}
+                                style={styles.refresh} />
                         </TouchableOpacity>
                     </View>
                     <Text>{this.state.plateau["text"]}</Text>
@@ -258,7 +270,7 @@ const styles = StyleSheet.create({
     up: {
         backgroundColor: "lightgrey",
         position: "absolute",
-        bottom: -100,
+        bottom: -115,
         left: -20,
         width: 50,
         transform: [{ rotate: "270deg" }],
@@ -268,7 +280,7 @@ const styles = StyleSheet.create({
     right: {
         backgroundColor: "lightgrey",
         position: "absolute",
-        bottom: -160,
+        bottom: -175,
         width: 50,
         height: 50,
         left: 40,
@@ -277,7 +289,7 @@ const styles = StyleSheet.create({
     down: {
         backgroundColor: "lightgrey",
         position: "absolute",
-        bottom: -220,
+        bottom: -235,
         width: 50,
         left: -20,
         transform: [{ rotate: "90deg" }],
@@ -287,7 +299,7 @@ const styles = StyleSheet.create({
     left: {
         backgroundColor: "lightgrey",
         position: "absolute",
-        bottom: -160,
+        bottom: -175,
         width: 50,
         transform: [{ scaleX: -1 }],
         height: 50,
