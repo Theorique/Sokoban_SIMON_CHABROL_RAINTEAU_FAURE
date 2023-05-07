@@ -77,28 +77,15 @@ class Partie extends Component {
         let tab = this.state.plateau;
         this.state.cibles.map((item) => {
             if (this.findWithId(item, tab)[0] !== "C") {
-                win = false;
+                this.setState({ win: false });
             }
             if (this.findWithId(item, tab)[0] === ".") {
                 this.findWithId(item, tab)[0] = "x";
             }
         });
-
         this.setState({ plateau: tab });
-
-        if (thiq.state.win) {
-            const { navigation } = this.props;
-
-            Alert.alert('Well done !', 'Level ' + '' + ' completed', [
-                {
-                    text: 'Back to the menu',
-                    onPress: () => { navigation.navigate('Accueil'); }
-                },
-                {
-                    text: 'Back to level list',
-                    onPress: () => { navigation.navigate('BoardsList', { name: 'BoardsList' }); }
-                }
-            ])
+        if (this.state.win) {
+            console.log("Vous avez gagné");
         }
     }
 
