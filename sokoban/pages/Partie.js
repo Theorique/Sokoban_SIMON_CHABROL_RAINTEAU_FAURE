@@ -5,6 +5,7 @@ import {
   Text,
   TouchableOpacity,
   Image,
+  Button,
   View,
   ImageBackground,
   FlatList,
@@ -14,7 +15,13 @@ import {
 class Partie extends Component {
   constructor(props) {
     super(props);
-    this.state = { plateau: ["ok"], joueur: null, playerPos: 0, cibles: [] };
+    this.state = {
+      plateau: ["ok"],
+      joueur: null,
+      playerPos: 0,
+      cibles: [],
+      win: false,
+    };
   }
 
   componentDidMount() {
@@ -22,16 +29,16 @@ class Partie extends Component {
   }
   loadBoard() {
     let customData = null;
-    switch(this.props.route.params.name){
-        case "plateau-1.json":
-            customData = require("../plateau/plateau-1.json");
-            break;
-        case "plateau-2.json":
-            customData = require("../plateau/plateau-2.json");
-            break;
-        default:
-            customData = require("../plateau/plateau-1.json");
-            break;
+    switch (this.props.route.params.name) {
+      case "plateau-1.json":
+        customData = require("../plateau/plateau-1.json");
+        break;
+      case "plateau-2.json":
+        customData = require("../plateau/plateau-2.json");
+        break;
+      default:
+        customData = require("../plateau/plateau-1.json");
+        break;
     }
     let temp = customData["text"].split("\n");
     let cible = [];
@@ -56,18 +63,18 @@ class Partie extends Component {
     return tab[(id / 9) >> 0].find((item) => item.key === id);
   }
   checkTarget() {
-    let win = true;
+    this.setState({ win: true });
     let tab = this.state.plateau;
     this.state.cibles.map((item) => {
       if (this.findWithId(item, tab)[0] !== "C") {
-        win = false;
+        this.setState({ win: false });
       }
       if (this.findWithId(item, tab)[0] === ".") {
         this.findWithId(item, tab)[0] = "x";
       }
     });
     this.setState({ plateau: tab });
-    if (win) {
+    if (this.state.win) {
       console.log("Vous avez gagné");
     }
   }
@@ -92,11 +99,15 @@ class Partie extends Component {
     this.checkTarget();
   }
   render() {
+    const { navigation } = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.menuTop}>
           <TouchableOpacity activeOpacity={1} onPress={() => this.loadBoard()}>
-            <Image source={require("../images/refresh.png")} style={styles.refresh} />
+            <Image
+              source={require("../images/refresh.png")}
+              style={styles.refresh}
+            />
           </TouchableOpacity>
         </View>
         <Text>{this.state.plateau["text"]}</Text>
@@ -167,6 +178,20 @@ class Partie extends Component {
             />
           )}
         />
+        {this.state.win ? (
+          <View style={styles.win}>
+            <Text style={styles.winT}>Vous avez gagné</Text>
+            <TouchableOpacity
+              style={styles.winB}
+              activeOpacity={1}
+              onPress={() => navigation.navigate("Accueil")}
+            >
+              <Image source={require("../images/home.png")} style={styles.home}/>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <View></View>
+        )}
         <TouchableOpacity activeOpacity={1} onPress={() => this.move(-9)}>
           <Image source={require("../images/next.png")} style={styles.up} />
         </TouchableOpacity>
@@ -187,6 +212,31 @@ class Partie extends Component {
 export default Partie;
 
 const styles = StyleSheet.create({
+  win: {
+    position: "relative",
+  },
+  winT: {
+    position: "absolute",
+    left: -100,
+    top: 15,
+    backgroundColor: "green",
+    color:"white",
+    padding:5,
+    fontWeight:"bold",
+    borderRadius:5,
+  },
+  winB: {
+    position: "absolute",
+    left: 50,
+    top: 10,
+    padding:5,
+    backgroundColor: "lightgrey",
+    borderRadius:5,
+  },
+  home:{
+    width: 30,
+    height: 30,
+  },
   menuTop: {
     marginTop: 0,
     backgroundColor: "black",
@@ -197,8 +247,8 @@ const styles = StyleSheet.create({
   },
   refresh: {
     position: "absolute",
-    right:0,
-    transform: [{ scaleX: -1}, { rotate: "30deg" }],
+    right: 0,
+    transform: [{ scaleX: -1 }, { rotate: "30deg" }],
     width: 60,
     height: 60,
   },
@@ -222,7 +272,7 @@ const styles = StyleSheet.create({
   up: {
     backgroundColor: "lightgrey",
     position: "absolute",
-    bottom: -100,
+    bottom: -115,
     left: -20,
     width: 50,
     transform: [{ rotate: "270deg" }],
@@ -232,7 +282,7 @@ const styles = StyleSheet.create({
   right: {
     backgroundColor: "lightgrey",
     position: "absolute",
-    bottom: -160,
+    bottom: -175,
     width: 50,
     height: 50,
     left: 40,
@@ -241,7 +291,7 @@ const styles = StyleSheet.create({
   down: {
     backgroundColor: "lightgrey",
     position: "absolute",
-    bottom: -220,
+    bottom: -235,
     width: 50,
     left: -20,
     transform: [{ rotate: "90deg" }],
@@ -251,7 +301,7 @@ const styles = StyleSheet.create({
   left: {
     backgroundColor: "lightgrey",
     position: "absolute",
-    bottom: -160,
+    bottom: -175,
     width: 50,
     transform: [{ scaleX: -1 }],
     height: 50,
