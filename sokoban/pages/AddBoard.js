@@ -17,30 +17,42 @@ class AddBoard extends Component {
     submit = () => {
         const state = this.state;
         const ip = require("../configAPI.json")['ip'];
-        console.log(JSON.stringify({
-            board_id: state.board_id,
-            name: state.name,
-            rows: state.rows,
-            nbRows: state.nbRows,
-            nbCols: state.nbCols
-        }))
 
-        fetch("http://" + ip + ":3001/boards/add", {
+        let url = "http://" + ip + ":3001/boards/add?name=" + state.name
+            + "&boardId=" + state.board_id
+            + "&nbCols=" + state.nbCols
+            + "&nbRows=" + state.nbRows
+        ;
+        let endUrl = '';
+
+        state.rows.map((row, key) => {
+            let encodedRow = encodeURIComponent(row.toString())
+            endUrl += "&rows[" + key + "]=" + encodedRow
+        })
+        url += endUrl;
+
+        fetch(url, {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                board_id: state.board_id,
-                name: state.name,
-                rows: state.rows,
-                nbRows: state.nbRows,
-                nbCols: state.nbCols
-            }),
         }).then((result) => {
             if (result.status !== 200) {
                 Alert.alert('Error', 'Fetching API failed : error ' + result.status);
+            } else {
+                const { navigation } = this.props;
+
+                Alert.alert('Success', 'The level was successfully created', [
+                    {
+                        text: 'Back to the menu',
+                        onPress: () => { navigation.navigate('Accueil'); }
+                    },
+                    {
+                        text: 'Back to level list',
+                        onPress: () => { navigation.navigate('BoardsList', { name: 'BoardsList' }); }
+                    }
+                ])
             }
         })
     }

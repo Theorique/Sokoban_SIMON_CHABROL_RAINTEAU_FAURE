@@ -29,7 +29,6 @@ class App extends Component {
                     <Stack.Screen name="BoardsList" component={BoardsList}/>
                     <Stack.Screen name="ShowBoard" component={ShowBoard}/>
                     <Stack.Screen name="AddBoard" component={AddBoard}/>
-                    {/*<Stack.Screen name="DeleteBoard" component={DeleteBoard}/>*/}
                 </Stack.Navigator>
             </NavigationContainer>
         );
