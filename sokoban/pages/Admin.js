@@ -24,9 +24,6 @@ class Admin extends Component {
                 }>
                     <Text style={styles.textButton}>3. Remove board from database [DANGEROUS]</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.textButton}>4. Quit</Text>
-                </TouchableOpacity>
             </View>
         )
     }
