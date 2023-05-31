@@ -52,23 +52,23 @@ class Accueil extends Component {
 
     return (
       <View style={styles.container}>
+        <Picker
+            selectedValue={this.state.niveauChoisi}
+            style={{ height: 50, width: 150 }}
+            onValueChange={(itemValue, itemIndex) => this.setState({ niveauChoisi: itemValue })}
+        >
+          {listNiv}
+        </Picker>
         <TouchableOpacity style={styles.button} onPress={() =>
           navigation.navigate('Partie', { boardID: this.state.niveauChoisi })
         }>
-          <Text style={styles.textButton}>CHARGER LE DERNIER NIVEAU</Text>
+          <Text style={styles.textButton}>CHARGER LE NIVEAU SÉLECTIONNÉ</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={() =>
           navigation.navigate('Admin', { name: 'Admin' })
         }>
           <Text style={styles.textButton}>ADMIN</Text>
         </TouchableOpacity>
-        <Picker
-          selectedValue={this.state.niveauChoisi}
-          style={{ height: 50, width: 150 }}
-          onValueChange={(itemValue, itemIndex) => this.setState({ niveauChoisi: itemValue })}
-        >
-          {listNiv}
-        </Picker>
       </View>
     );
   }

@@ -17,15 +17,22 @@ class AddBoard extends Component {
     submit = () => {
         const state = this.state;
         const ip = require("../configAPI.json")['ip'];
+        console.log(JSON.stringify({
+            board_id: state.board_id,
+            name: state.name,
+            rows: state.rows,
+            nbRows: state.nbRows,
+            nbCols: state.nbCols
+        }))
 
-        fetch("http://" + ip + ":3001/board/add", {
+        fetch("http://" + ip + ":3001/boards/add", {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                boardId: state.boardId,
+                board_id: state.board_id,
                 name: state.name,
                 rows: state.rows,
                 nbRows: state.nbRows,
