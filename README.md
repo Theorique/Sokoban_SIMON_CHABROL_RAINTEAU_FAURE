@@ -8,3 +8,4 @@ Lien de l'API : https://github.com/Theorique/Sokoban-API_SIMON_CHABROL_RAINTEAU_
 Lien mini projet 4h :
   - SIMON Grégory : https://github.com/Theorique/poc_4h_RN_Games
   - RAINTEAU Tom : https://github.com/Wyverl/Devoir4hRainteauTom
+  - Hugo Faure : https://github.com/HugoHysequa/4hProjet
